@@ -103,6 +103,16 @@ const Content: React.FC = () => {
         />
       </div>
       <div className="col-span-3">
+        <NoteEditor
+          onSave={({ title, content }) => {
+            void createNote.mutate({
+              title,
+              content,
+              topicId: selectedTopic?.id ?? "",
+            });
+          }}
+        />
+
         <div>
           {notes?.map((note) => (
             <div key={note.id} className="mt-5">
@@ -113,16 +123,6 @@ const Content: React.FC = () => {
             </div>
           ))}
         </div>
-
-        <NoteEditor
-          onSave={({ title, content }) => {
-            void createNote.mutate({
-              title,
-              content,
-              topicId: selectedTopic?.id ?? "",
-            });
-          }}
-        />
       </div>
     </div>
   );
